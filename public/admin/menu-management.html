@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menu Management - Your Restaurant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Menu Management</h1>
+      <p>Add or update dishes available to customers</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="menu-management-container">
+      <h2>Add New Dish</h2>
+      <form id="menuForm">
+        <div class="form-group">
+          <label for="dishName">Dish Name:</label>
+          <input type="text" id="dishName" required />
+        </div>
+        <div class="form-group">
+          <label for="dishCategory">Category:</label>
+          <select id="dishCategory" required>
+            <option value="Main Course">Main Course</option>
+            <option value="Drinks">Drinks</option>
+            <option value="Roti">Roti</option>
+            <option value="Rice">Rice</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="dishPrice">Price:</label>
+          <input type="number" id="dishPrice" step="0.01" required />
+        </div>
+        <div class="form-group">
+          <label for="dishDescription">Description:</label>
+          <textarea id="dishDescription"></textarea>
+        </div>
+        <button type="submit">Add Dish</button>
+      </form>
+      <div id="menuFeedback"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Your Restaurant. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+  <script src="../assets/js/menu-management.js"></script>
+</body>
+</html>
