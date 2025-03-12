@@ -1,0 +1,16 @@
+{
+    "name": "order",
+    "version": "1.0.0",
+    "description": "QR Code ordering system with customer, kitchen, and cashier dashboards",
+    "main": "index.js",
+    "scripts": {
+      "dev": "vercel dev",
+      "deploy": "vercel --prod"
+    },
+    "author": "Your Name",
+    "license": "MIT",
+    "dependencies": {
+      "firebase": "^9.0.0"
+    }
+  }
+  

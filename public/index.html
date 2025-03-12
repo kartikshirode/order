@@ -1,0 +1,53 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Order Food - Your Restaurant</title>
+  <!-- Google Fonts for a modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Your Restaurant</h1>
+      <p>Delicious food at your table</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="order-container">
+      <h2>Order Your Meal</h2>
+      <p>Table: <span id="tableNumber"></span></p>
+      <div class="menu-item">
+        <label for="fruitSelection">Fruity Dish:</label>
+        <select id="fruitSelection">
+          <option value="apple">Apple</option>
+          <option value="banana">Banana</option>
+          <option value="mango">Mango</option>
+        </select>
+      </div>
+      <div class="menu-item">
+        <label for="riceSelection">Rice Dish:</label>
+        <select id="riceSelection">
+          <option value="basmati">Basmati</option>
+          <option value="jasmine">Jasmine</option>
+          <option value="brown">Brown Rice</option>
+        </select>
+      </div>
+      <button id="submitOrder">Submit Order</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Your Restaurant. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

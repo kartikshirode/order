@@ -1,0 +1,115 @@
+/* public/assets/css/styles.css */
+
+/* Reset margins and paddings for consistency */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base styling for body */
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Header styling */
+header {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 20px 0;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 5px;
+  color: #d35400;
+}
+
+header p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Main ordering container styling */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  flex-grow: 1;
+}
+
+.order-container {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.order-container h2 {
+  margin-bottom: 20px;
+  color: #d35400;
+}
+
+/* Styling for each menu item */
+.menu-item {
+  margin: 15px 0;
+  text-align: left;
+}
+
+.menu-item label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.menu-item select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+/* Styling for the submit button */
+button#submitOrder {
+  background: #d35400;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 20px;
+  width: 100%;
+}
+
+button#submitOrder:hover {
+  background: #e67e22;
+}
+
+/* Footer styling */
+footer {
+  text-align: center;
+  padding: 15px 0;
+  background: rgba(255, 255, 255, 0.85);
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.9rem;
+}
