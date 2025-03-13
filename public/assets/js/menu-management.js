@@ -1,18 +1,10 @@
-// Initialize Firebase (replace with your own config)
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  // ... other config options
-};
+/*
+  Admin Menu Management Script
+  - Handles form submission to add a new dish.
+  - In a real app, you'd send this data to a backend API.
+*/
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-const menuForm = document.getElementById('menuForm');
-const menuFeedback = document.getElementById('menuFeedback');
-
-menuForm.addEventListener('submit', (e) => {
+document.getElementById('menuForm').addEventListener('submit', (e) => {
   e.preventDefault();
   
   const dishName = document.getElementById('dishName').value;
@@ -20,23 +12,21 @@ menuForm.addEventListener('submit', (e) => {
   const dishPrice = parseFloat(document.getElementById('dishPrice').value);
   const dishDescription = document.getElementById('dishDescription').value;
   
-  const dishData = {
+  const newDish = {
+    id: Date.now().toString(), // Generate a simple unique ID
     name: dishName,
     category: dishCategory,
     price: dishPrice,
     description: dishDescription
   };
   
-  db.collection('menu')
-    .add(dishData)
-    .then(() => {
-      menuFeedback.textContent = 'Dish added successfully!';
-      menuFeedback.style.color = 'green';
-      menuForm.reset();
-    })
-    .catch((error) => {
-      console.error("Error adding dish: ", error);
-      menuFeedback.textContent = 'Error adding dish. Please try again.';
-      menuFeedback.style.color = 'red';
-    });
+  // Simulate adding the dish (e.g., sending to your backend)
+  console.log('New dish added:', newDish);
+  
+  const feedback = document.getElementById('menuFeedback');
+  feedback.textContent = 'Dish added successfully!';
+  feedback.style.color = 'green';
+  
+  // Optionally, reset the form
+  document.getElementById('menuForm').reset();
 });

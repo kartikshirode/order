@@ -1,15 +1,29 @@
-// Initialize Firebase (replace with your own config)
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  // ... other config options
+/*
+  Customer Ordering Script
+  - Renders menu items by category
+  - Manages order selections
+  - Simulates order submission (e.g., via a backend API)
+*/
+
+// Simulated menu data (in a real app, fetch this from your backend)
+const menuData = {
+  "Main Course": [
+    { id: "1", name: "Grilled Chicken", description: "Juicy grilled chicken", price: 12.99 },
+    { id: "2", name: "Beef Steak", description: "Tender steak cooked to perfection", price: 19.99 }
+  ],
+  "Drinks": [
+    { id: "3", name: "Coke", description: "Refreshing cola", price: 2.99 },
+    { id: "4", name: "Orange Juice", description: "Fresh squeezed", price: 3.99 }
+  ],
+  "Roti": [
+    { id: "5", name: "Butter Roti", description: "Soft and buttery", price: 1.99 }
+  ],
+  "Rice": [
+    { id: "6", name: "Fried Rice", description: "Special fried rice with veggies", price: 8.99 }
+  ]
 };
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-// Get table number from URL query parameters
+// Parse table number from URL query parameters
 const urlParams = new URLSearchParams(window.location.search);
 const tableNumber = urlParams.get('table') || 'Unknown';
 document.getElementById('tableNumber').textContent = tableNumber;
@@ -17,63 +31,50 @@ document.getElementById('tableNumber').textContent = tableNumber;
 // Global variable to store selected order items
 let selectedOrderItems = [];
 
-// Function to render menu items based on category
+// Render menu items based on the selected category
 function renderMenuItems(category) {
   const menuItemsDiv = document.getElementById('menuItems');
-  menuItemsDiv.innerHTML = '<p>Loading menu items...</p>';
+  menuItemsDiv.innerHTML = '';
   
-  db.collection('menu')
-    .where('category', '==', category)
-    .get()
-    .then((snapshot) => {
-      if (snapshot.empty) {
-        menuItemsDiv.innerHTML = '<p>No items available in this category.</p>';
-        return;
+  const items = menuData[category];
+  if (!items || items.length === 0) {
+    menuItemsDiv.innerHTML = '<p>No items available in this category.</p>';
+    return;
+  }
+  
+  items.forEach(item => {
+    const dishCard = document.createElement('div');
+    dishCard.className = 'menu-item';
+    dishCard.innerHTML = `
+      <h4>${item.name}</h4>
+      <p>${item.description}</p>
+      <p>Price: $${item.price.toFixed(2)}</p>
+      <button data-id="${item.id}">Add to Order</button>
+    `;
+    menuItemsDiv.appendChild(dishCard);
+  });
+  
+  // Attach event listeners for "Add to Order" buttons
+  document.querySelectorAll('.menu-item button').forEach((btn) => {
+    btn.addEventListener('click', function() {
+      const itemId = this.getAttribute('data-id');
+      const item = menuData[category].find(i => i.id === itemId);
+      if (item) {
+        selectedOrderItems.push(item);
+        updateSelectedItems();
       }
-      menuItemsDiv.innerHTML = '';
-      snapshot.forEach((doc) => {
-        const dish = doc.data();
-        // Create a card for each dish
-        const dishCard = document.createElement('div');
-        dishCard.className = 'menu-item';
-        dishCard.innerHTML = `
-          <h4>${dish.name}</h4>
-          <p>${dish.description || ''}</p>
-          <p>Price: $${dish.price ? dish.price.toFixed(2) : '0.00'}</p>
-          <button data-id="${doc.id}">Add to Order</button>
-        `;
-        menuItemsDiv.appendChild(dishCard);
-      });
-      
-      // Attach event listeners for "Add to Order" buttons
-      document.querySelectorAll('.menu-item button').forEach((btn) => {
-        btn.addEventListener('click', function() {
-          const dishId = this.getAttribute('data-id');
-          // Retrieve dish details and add to order
-          db.collection('menu').doc(dishId).get().then((doc) => {
-            if (doc.exists) {
-              const dishData = doc.data();
-              selectedOrderItems.push({ id: dishId, ...dishData });
-              updateSelectedItems();
-            }
-          });
-        });
-      });
-    })
-    .catch((error) => {
-      console.error("Error fetching menu items: ", error);
-      menuItemsDiv.innerHTML = '<p>Error loading menu items.</p>';
     });
+  });
 }
 
-// Function to update the order summary display
+// Update the order summary display
 function updateSelectedItems() {
   const selectedItemsList = document.getElementById('selectedItems');
   selectedItemsList.innerHTML = '';
   selectedOrderItems.forEach((item, index) => {
     const li = document.createElement('li');
-    li.textContent = `${item.name} - $${item.price ? item.price.toFixed(2) : '0.00'}`;
-    // Optional: add a remove button for each selected item
+    li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+    // Remove button for each selected item
     const removeBtn = document.createElement('button');
     removeBtn.textContent = 'Remove';
     removeBtn.style.marginLeft = '10px';
@@ -86,11 +87,10 @@ function updateSelectedItems() {
   });
 }
 
-// Event listener for navigation bar category clicks
+// Event listener for category navigation clicks
 document.querySelectorAll('.menu-nav ul li').forEach((navItem) => {
   navItem.addEventListener('click', function() {
-    // Remove active class from all items and set for clicked category
-    document.querySelectorAll('.menu-nav ul li').forEach((item) => item.classList.remove('active'));
+    document.querySelectorAll('.menu-nav ul li').forEach(item => item.classList.remove('active'));
     this.classList.add('active');
     const category = this.getAttribute('data-category');
     renderMenuItems(category);
@@ -100,7 +100,7 @@ document.querySelectorAll('.menu-nav ul li').forEach((navItem) => {
 // Load default category ("Main Course") on page load
 renderMenuItems('Main Course');
 
-// Handle order submission
+// Handle order submission (simulate sending order data)
 document.getElementById('submitOrder').addEventListener('click', () => {
   if (selectedOrderItems.length === 0) {
     alert('Please add at least one dish to your order.');
@@ -111,18 +111,14 @@ document.getElementById('submitOrder').addEventListener('click', () => {
     table: tableNumber,
     items: selectedOrderItems,
     status: 'Waiting',
-    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    timestamp: new Date().toISOString()
   };
-
-  db.collection('orders')
-    .add(orderData)
-    .then(() => {
-      alert('Order submitted successfully!');
-      selectedOrderItems = [];
-      updateSelectedItems();
-    })
-    .catch((error) => {
-      console.error("Error submitting order: ", error);
-      alert('There was an error submitting your order. Please try again.');
-    });
+  
+  // Simulate order submission (e.g., via a backend API call)
+  console.log('Order submitted:', orderData);
+  alert('Order submitted successfully!');
+  
+  // Clear the current order
+  selectedOrderItems = [];
+  updateSelectedItems();
 });

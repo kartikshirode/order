@@ -1,24 +1,19 @@
-<!-- public/dashboard/cashier.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cashier Dashboard</title>
+  <title>Cashier Dashboard - Your Restaurant</title>
   <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
   <h1>Cashier Dashboard</h1>
   <div id="ordersContainer">
-    <!-- Orders will load here -->
+    <!-- Orders will be dynamically loaded here -->
+    <p>(Order management functionality to be integrated.)</p>
   </div>
   <button id="logoutBtn">Logout</button>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
-  <script src="../assets/js/auth.js"></script>
-  <script src="../assets/js/dashboard.js"></script>
+  <script type="module" src="../assets/js/auth.js"></script>
 </body>
 </html>
