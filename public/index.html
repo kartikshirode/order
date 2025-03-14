@@ -1,67 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Order Food - Your Restaurant</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-  <header>
-    <div class="container">
-      <h1>Your Restaurant</h1>
-      <p>Delicious food at your table</p>
-    </div>
-  </header>
-
-  <!-- Customer Temporary Login: Enter Table Number -->
+  <!-- Table Number Entry Section -->
   <div id="customerLogin" class="login-section">
     <h2>Enter Your Table Number</h2>
     <form id="tableLoginForm">
-      <input type="text" id="tableInput" placeholder="Table Number" required>
+      <input type="text" id="tableInput" placeholder="Table Number" required />
       <button type="submit">Enter</button>
     </form>
   </div>
 
-  <!-- Ordering Interface (hidden until table number is set) -->
+  <!-- Ordering Interface (hidden by default) -->
   <div id="orderingInterface" class="hidden">
-    <!-- Order Status Section -->
-    <div id="orderStatusSection" class="order-status">
-      <h2>Order Status: <span id="orderStatusText">Not Ordered</span></h2>
-    </div>
-    
-    <!-- Navigation Bar for Categories -->
-    <nav class="menu-nav">
-      <ul>
-        <li data-category="Main Course" class="active">Main Course</li>
-        <li data-category="Drinks">Drinks</li>
-        <li data-category="Roti">Roti</li>
-        <li data-category="Rice">Rice</li>
-      </ul>
-    </nav>
-
-    <main>
-      <div class="order-container">
-        <div class="table-info">
-          <p>Table: <span id="tableNumber"></span></p>
-        </div>
-        <!-- Menu Items will be loaded here -->
-        <div id="menuItems" class="menu-items"></div>
-        <!-- Order Summary -->
-        <div class="order-summary">
-          <h3>Your Order</h3>
-          <ul id="selectedItems"></ul>
-        </div>
+    <header>
+      <div class="container">
+        <h1>Your Restaurant</h1>
+        <p>Delicious food at your table</p>
       </div>
-    </main>
-
-    <!-- Payment Section -->
-    <div id="paymentSection" class="payment-section">
-      <h2>Payment Options</h2>
-      <button id="payWebapp">Pay via Webapp</button>
-      <button id="payCashier">Pay at Cashier</button>
+    </header>
+    <div class="order-interface">
+      <!-- Display table number in header -->
+      <p>Table: <span id="tableNumberDisplay"></span></p>
+      <!-- Navigation Bar for Menu Categories -->
+      <nav class="menu-nav">
+        <ul>
+          <li data-category="Main Course" class="active">Main Course</li>
+          <li data-category="Drinks">Drinks</li>
+          <li data-category="Roti">Roti</li>
+          <li data-category="Rice">Rice</li>
+        </ul>
+      </nav>
+      <main>
+        <div class="order-container">
+          <div class="table-info">
+            <p>Table: <span id="tableNumber"></span></p>
+          </div>
+          <!-- Menu items will load here -->
+          <div id="menuItems" class="menu-items"></div>
+          <!-- Order Summary -->
+          <div class="order-summary">
+            <h3>Your Order</h3>
+            <ul id="selectedItems"></ul>
+          </div>
+        </div>
+      </main>
+      <!-- Payment Section -->
+      <div class="payment-section">
+        <h2>Payment Options</h2>
+        <button id="payWebapp">Pay via Webapp</button>
+        <button id="payCashier">Pay at Cashier</button>
+      </div>
     </div>
   </div>
 
@@ -69,7 +63,7 @@
     <p>&copy; 2025 Your Restaurant. All Rights Reserved.</p>
   </footer>
 
-  <!-- Load our customer logic as an ES module -->
+  <!-- Load our ordering logic (which also handles the temporary login) -->
   <script type="module" src="assets/js/app.js"></script>
 </body>
 </html>

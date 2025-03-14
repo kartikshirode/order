@@ -21,12 +21,10 @@
   </div>
 
   <script>
-    // Wait for the DOM to load
     document.addEventListener('DOMContentLoaded', () => {
-      // Read the table number from localStorage
       const tableNum = localStorage.getItem('tableNumber');
+      console.log("Table number from localStorage:", tableNum);
       if (!tableNum) {
-        // If not set, redirect back to index.html
         window.location.href = 'index.html';
       } else {
         document.getElementById('tableNumber').textContent = tableNum;

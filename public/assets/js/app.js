@@ -1,7 +1,7 @@
-// Import Firebase config if needed (for Storage/Authentication usage in future features)
-import { getAuth } from "./firebase-config.js";
+// Import Firebase config if needed (for future Storage/Authentication usage)
+// import { getAuth } from "./firebase-config.js";
 
-// Simulated menu data for demonstration purposes
+// Simulated menu data (in a real app, fetch from a backend or Firebase)
 const menuData = {
   "Main Course": [
     { id: "1", name: "Grilled Chicken", description: "Juicy grilled chicken", price: 12.99 },
@@ -19,29 +19,33 @@ const menuData = {
   ]
 };
 
-// Elements for temporary customer login and ordering interface
+// Grab elements
 const customerLoginDiv = document.getElementById('customerLogin');
 const orderingInterfaceDiv = document.getElementById('orderingInterface');
 const tableLoginForm = document.getElementById('tableLoginForm');
 const tableInput = document.getElementById('tableInput');
-const tableNumberSpan = document.getElementById('tableNumber');
-const orderStatusText = document.getElementById('orderStatusText');
+const tableNumberDisplay = document.getElementById('tableNumberDisplay'); // in header
+const tableNumberSpan = document.getElementById('tableNumber'); // in order container
 const menuItemsDiv = document.getElementById('menuItems');
 const selectedItemsList = document.getElementById('selectedItems');
 const payWebappBtn = document.getElementById('payWebapp');
 const payCashierBtn = document.getElementById('payCashier');
 
-// Global variable to store selected order items
 let selectedOrderItems = [];
 
-// Initialize customer session by checking for stored table number
+// Initialize customer session
 function initCustomerSession() {
   const tableNum = localStorage.getItem('tableNumber');
   if (tableNum) {
+    // Hide login, show ordering interface
     customerLoginDiv.classList.add('hidden');
     orderingInterfaceDiv.classList.remove('hidden');
+    tableNumberDisplay.textContent = tableNum;
     tableNumberSpan.textContent = tableNum;
+    // Optionally, load default category menu items
+    renderMenuItems('Main Course');
   } else {
+    // Show login, hide ordering interface
     customerLoginDiv.classList.remove('hidden');
     orderingInterfaceDiv.classList.add('hidden');
   }
@@ -49,21 +53,21 @@ function initCustomerSession() {
 
 initCustomerSession();
 
-// Handle temporary login for customer by table number
+// Handle table login form submission
 if (tableLoginForm) {
   tableLoginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const tableNum = tableInput.value.trim();
     if (tableNum !== "") {
       localStorage.setItem('tableNumber', tableNum);
-      tableNumberSpan.textContent = tableNum;
-      customerLoginDiv.classList.add('hidden');
-      orderingInterfaceDiv.classList.remove('hidden');
+      initCustomerSession(); // reinitialize to show ordering interface
+    } else {
+      alert("Please enter a valid table number.");
     }
   });
 }
 
-// Render menu items based on selected category
+// Render menu items for the given category
 function renderMenuItems(category) {
   menuItemsDiv.innerHTML = '';
   const items = menuData[category];
@@ -84,7 +88,7 @@ function renderMenuItems(category) {
     menuItemsDiv.appendChild(dishCard);
   });
   
-  // Attach event listeners for "Add to Order" buttons
+  // Attach event listeners for each "Add to Order" button
   document.querySelectorAll('.menu-item button').forEach((btn) => {
     btn.addEventListener('click', function() {
       const itemId = this.getAttribute('data-id');
@@ -92,8 +96,6 @@ function renderMenuItems(category) {
       if (item) {
         selectedOrderItems.push(item);
         updateSelectedItems();
-        // Simulate order status update upon first order item addition
-        orderStatusText.textContent = "Order Received";
       }
     });
   });
@@ -117,7 +119,7 @@ function updateSelectedItems() {
   });
 }
 
-// Category navigation handling
+// Handle category navigation
 document.querySelectorAll('.menu-nav ul li').forEach((navItem) => {
   navItem.addEventListener('click', function() {
     document.querySelectorAll('.menu-nav ul li').forEach(item => item.classList.remove('active'));
@@ -127,17 +129,14 @@ document.querySelectorAll('.menu-nav ul li').forEach((navItem) => {
   });
 });
 
-// Load default category on page load
-renderMenuItems('Main Course');
+// Load default category on page load if ordering interface is visible
+if (!orderingInterfaceDiv.classList.contains('hidden')) {
+  renderMenuItems('Main Course');
+}
 
 // Payment options: simulate payment processing and clear session
-payWebappBtn.addEventListener('click', () => {
-  processPayment("Webapp");
-});
-
-payCashierBtn.addEventListener('click', () => {
-  processPayment("Cashier");
-});
+payWebappBtn.addEventListener('click', () => processPayment("Webapp"));
+payCashierBtn.addEventListener('click', () => processPayment("Cashier"));
 
 function processPayment(method) {
   if (selectedOrderItems.length === 0) {
@@ -145,12 +144,13 @@ function processPayment(method) {
     return;
   }
   alert(`Payment processed via ${method}. Thank you!`);
-  // Reset order and update order status
+  // Clear the order and update UI
   selectedOrderItems = [];
   updateSelectedItems();
-  orderStatusText.textContent = "Order Completed";
-  // Clear temporary customer session (table login)
+  // Optionally update order status or perform other actions here
+
+  // Clear temporary session so the table is ready for new orders
   localStorage.removeItem('tableNumber');
-  // Reload page to reset customer ordering interface
+  // Reload the page to reset the interface
   location.reload();
 }
