@@ -32,7 +32,7 @@
             <td>
               <select class="status-dropdown">
                 <option value="Order Received" selected>Order Received</option>
-                <option value="Prepering">Prepering</option>
+                <option value="Preparing">Preparing</option>
                 <option value="Cooked">Cooked</option>
                 <option value="Served">Served</option>
               </select>
@@ -47,13 +47,13 @@
 
   <script type="module" src="../assets/js/auth.js"></script>
   <script>
-    // Kitchen dashboard script (simulate updating order status)
+    // Kitchen dashboard sample functionality
     document.querySelectorAll('.updateStatus').forEach(btn => {
       btn.addEventListener('click', () => {
         const row = btn.closest('tr');
         const newStatus = row.querySelector('.status-dropdown').value;
         alert(`Order status updated to "${newStatus}"`);
-        // In a real app, update the order status in Firebase here.
+        // Update order status in Firebase in a real app.
       });
     });
   </script>

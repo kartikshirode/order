@@ -7,7 +7,7 @@ document.getElementById('menuForm').addEventListener('submit', (e) => {
   const dishDescription = document.getElementById('dishDescription').value;
   
   const newDish = {
-    id: Date.now().toString(), // Simple unique ID generation
+    id: Date.now().toString(),
     name: dishName,
     category: dishCategory,
     price: dishPrice,

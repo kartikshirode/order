@@ -1,12 +1,12 @@
 // Simulated menu data for demonstration purposes
 const menuData = {
   "Main Course": [
-    { id: "1", name: "Aloo Mutter", description: "Spicy Aloo Mutter", price: 2.99 },
-    { id: "2", name: "Butter Paner Masala", description: "Paner to Perfection", price: 19.99 }
+    { id: "1", name: "Grilled Chicken", description: "Juicy grilled chicken", price: 12.99 },
+    { id: "2", name: "Beef Steak", description: "Tender steak cooked to perfection", price: 19.99 }
   ],
   "Drinks": [
     { id: "3", name: "Coke", description: "Refreshing cola", price: 2.99 },
-    { id: "4", name: "Orange Juice", description: "Freshly squeezed", price: 3.99 }
+    { id: "4", name: "Orange Juice", description: "Fresh squeezed", price: 3.99 }
   ],
   "Roti": [
     { id: "5", name: "Butter Roti", description: "Soft and buttery", price: 1.99 }
@@ -21,8 +21,8 @@ const customerLoginDiv = document.getElementById('customerLogin');
 const orderingInterfaceDiv = document.getElementById('orderingInterface');
 const tableLoginForm = document.getElementById('tableLoginForm');
 const tableInput = document.getElementById('tableInput');
-const tableNumberDisplay = document.getElementById('tableNumberDisplay'); // in header
-const tableNumberSpan = document.getElementById('tableNumber'); // in order container
+const tableNumberDisplay = document.getElementById('tableNumberDisplay');
+const tableNumberSpan = document.getElementById('tableNumber');
 const orderStatusText = document.getElementById('orderStatusText');
 const menuItemsDiv = document.getElementById('menuItems');
 const selectedItemsList = document.getElementById('selectedItems');
@@ -40,7 +40,6 @@ function initCustomerSession() {
     orderingInterfaceDiv.classList.remove('hidden');
     tableNumberDisplay.textContent = tableNum;
     tableNumberSpan.textContent = tableNum;
-    // Load default category
     renderMenuItems('Main Course');
   } else {
     customerLoginDiv.classList.remove('hidden');
@@ -138,9 +137,7 @@ if (confirmOrderBtn) {
       alert("No items in your order to confirm.");
       return;
     }
-    // Simulate order confirmation – in a real app, update your backend/Firebase
     alert("Your order has been confirmed and sent to the kitchen and cashier.");
-    // Update the order status panel (this could later be updated by kitchen)
     orderStatusText.textContent = "Order Received";
   });
 }
@@ -155,11 +152,8 @@ function processPayment(method) {
     return;
   }
   alert(`Payment processed via ${method}. Thank you!`);
-  // Clear the order and update UI
   selectedOrderItems = [];
   updateSelectedItems();
-  // Clear temporary session so that the table is free for new orders
   localStorage.removeItem('tableNumber');
-  // Reload the page to reset the interface
   location.reload();
 }

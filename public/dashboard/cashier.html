@@ -40,12 +40,12 @@
 
   <script type="module" src="../assets/js/auth.js"></script>
   <script>
-    // Cashier dashboard script (simulate marking an order as paid)
+    // Cashier dashboard sample functionality
     document.querySelectorAll('.markPaid').forEach(btn => {
       btn.addEventListener('click', () => {
         const row = btn.closest('tr');
         alert(`Order for Table ${row.cells[0].textContent} marked as paid.`);
-        // In a real app, update the payment status in Firebase here.
+        // Update payment status in Firebase in a real app.
       });
     });
   </script>

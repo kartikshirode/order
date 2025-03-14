@@ -10,13 +10,21 @@ if (document.getElementById('loginForm')) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const userEmail = userCredential.user.email;
-        if (userEmail.includes("kitchen")) {
-          window.location.href = 'dashboard/kitchen.html';
-        } else if (userEmail.includes("cashier")) {
-          window.location.href = 'dashboard/cashier.html';
-        } else {
-          window.location.href = 'dashboard/kitchen.html';
-        }
+        // Optionally check custom claims for role-based redirection
+        auth.currentUser.getIdTokenResult()
+          .then((idTokenResult) => {
+            const role = idTokenResult.claims.role;
+            if (role === 'kitchen') {
+              window.location.href = 'dashboard/kitchen.html';
+            } else if (role === 'cashier') {
+              window.location.href = 'dashboard/cashier.html';
+            } else {
+              window.location.href = 'dashboard/kitchen.html';
+            }
+          })
+          .catch((error) => {
+            console.error("Error getting token result:", error);
+          });
       })
       .catch((error) => {
         console.error("Error logging in:", error);
