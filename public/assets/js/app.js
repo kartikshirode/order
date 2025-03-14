@@ -1,12 +1,12 @@
 // Simulated menu data for demonstration purposes
 const menuData = {
   "Main Course": [
-    { id: "1", name: "Aloo Mutter", description: "Juicy Aloo Mutter", price: 2.99 },
+    { id: "1", name: "Aloo Mutter", description: "Spicy Aloo Mutter", price: 2.99 },
     { id: "2", name: "Butter Paner Masala", description: "Paner to Perfection", price: 19.99 }
   ],
   "Drinks": [
     { id: "3", name: "Coke", description: "Refreshing cola", price: 2.99 },
-    { id: "4", name: "Orange Juice", description: "Fresh squeezed", price: 3.99 }
+    { id: "4", name: "Orange Juice", description: "Freshly squeezed", price: 3.99 }
   ],
   "Roti": [
     { id: "5", name: "Butter Roti", description: "Soft and buttery", price: 1.99 }
