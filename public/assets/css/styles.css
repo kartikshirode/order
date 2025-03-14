@@ -1,8 +1,8 @@
-/* Reset and Base Styles */
+/* --- Global Reset & Base Styles --- */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -11,14 +11,23 @@ body {
   color: #333;
   line-height: 1.6;
   min-height: 100vh;
+  padding: 20px;
 }
 
-/* Header */
+/* --- Container & Header --- */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
 header {
   background: rgba(255, 255, 255, 0.9);
   padding: 20px 0;
+  margin-bottom: 20px;
   text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 header h1 {
@@ -31,21 +40,15 @@ header p {
   color: #555;
 }
 
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Login Section (for customer table number entry) */
+/* --- Login Section (Table Number Entry) --- */
 .login-section {
   max-width: 400px;
-  margin: 40px auto;
+  margin: 100px auto;
   background: #fff;
-  padding: 20px;
+  padding: 30px;
   border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .login-section h2 {
@@ -64,8 +67,8 @@ header p {
 .login-section button {
   background: #d35400;
   color: #fff;
-  padding: 10px 20px;
   border: none;
+  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s;
@@ -75,15 +78,16 @@ header p {
   background: #e67e22;
 }
 
-/* Hide elements when needed */
+/* Utility Class for Hiding Elements */
 .hidden {
   display: none;
 }
 
-/* Navigation Bar */
+/* --- Navigation Bar for Menu Categories --- */
 .menu-nav {
   background: #fff;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
 }
 
 .menu-nav ul {
@@ -107,7 +111,23 @@ header p {
   color: #fff;
 }
 
-/* Ordering Container */
+/* --- Ordering Interface (order.html) --- */
+.order-interface {
+  max-width: 800px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.order-interface p {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+/* --- Order Container (Main Ordering Area) --- */
 .order-container {
   background: #fff;
   padding: 30px;
@@ -123,7 +143,7 @@ header p {
   font-size: 1.2rem;
 }
 
-/* Menu Items Grid */
+/* --- Menu Items Grid --- */
 .menu-items {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -164,10 +184,11 @@ header p {
   background: #e67e22;
 }
 
-/* Order Summary */
+/* --- Order Summary --- */
 .order-summary {
   border-top: 1px solid #ddd;
   padding-top: 20px;
+  text-align: left;
 }
 
 .order-summary h3 {
@@ -183,7 +204,7 @@ header p {
   margin-bottom: 8px;
 }
 
-/* Payment Section */
+/* --- Payment Section --- */
 .payment-section {
   text-align: center;
   margin: 20px auto;
@@ -209,7 +230,7 @@ header p {
   background: #e67e22;
 }
 
-/* Dashboard Container for Kitchen/Cashier */
+/* --- Dashboard Styles (Kitchen, Cashier) --- */
 .dashboard-container {
   width: 90%;
   max-width: 1000px;
@@ -236,7 +257,42 @@ header p {
   background: #f6d365;
 }
 
-/* Footer */
+/* --- Admin Menu Management Styles --- */
+.menu-management-container {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 20px auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.menu-management-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #d35400;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* --- Footer --- */
 footer {
   text-align: center;
   padding: 15px 0;
