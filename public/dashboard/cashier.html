@@ -7,13 +7,47 @@
   <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
-  <h1>Cashier Dashboard</h1>
-  <div id="ordersContainer">
-    <!-- Orders will be dynamically loaded here -->
-    <p>(Order management functionality to be integrated.)</p>
-  </div>
-  <button id="logoutBtn">Logout</button>
+  <header>
+    <div class="container">
+      <h1>Cashier Dashboard</h1>
+    </div>
+  </header>
+
+  <main>
+    <div class="dashboard-container">
+      <table class="orders-table">
+        <thead>
+          <tr>
+            <th>Table</th>
+            <th>Order Items</th>
+            <th>Status</th>
+            <th>Payment</th>
+          </tr>
+        </thead>
+        <tbody id="cashierOrders">
+          <!-- Example static order row. In a real app, load orders dynamically from Firebase. -->
+          <tr>
+            <td>5</td>
+            <td>Grilled Chicken, Coke</td>
+            <td>Served</td>
+            <td><button class="markPaid">Mark as Paid</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button id="logoutBtn">Logout</button>
+  </main>
 
   <script type="module" src="../assets/js/auth.js"></script>
+  <script>
+    // Cashier dashboard script (simulate marking an order as paid)
+    document.querySelectorAll('.markPaid').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const row = btn.closest('tr');
+        alert(`Order for Table ${row.cells[0].textContent} marked as paid.`);
+        // In a real app, update the payment status in Firebase here.
+      });
+    });
+  </script>
 </body>
 </html>

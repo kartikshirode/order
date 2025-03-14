@@ -1,11 +1,7 @@
-/*
-  Customer Ordering Script
-  - Renders menu items by category
-  - Manages order selections
-  - Simulates order submission (e.g., via a backend API)
-*/
+// Import Firebase config if needed (for Storage/Authentication usage in future features)
+import { getAuth } from "./firebase-config.js";
 
-// Simulated menu data (in a real app, fetch this from your backend)
+// Simulated menu data for demonstration purposes
 const menuData = {
   "Main Course": [
     { id: "1", name: "Grilled Chicken", description: "Juicy grilled chicken", price: 12.99 },
@@ -23,19 +19,53 @@ const menuData = {
   ]
 };
 
-// Parse table number from URL query parameters
-const urlParams = new URLSearchParams(window.location.search);
-const tableNumber = urlParams.get('table') || 'Unknown';
-document.getElementById('tableNumber').textContent = tableNumber;
+// Elements for temporary customer login and ordering interface
+const customerLoginDiv = document.getElementById('customerLogin');
+const orderingInterfaceDiv = document.getElementById('orderingInterface');
+const tableLoginForm = document.getElementById('tableLoginForm');
+const tableInput = document.getElementById('tableInput');
+const tableNumberSpan = document.getElementById('tableNumber');
+const orderStatusText = document.getElementById('orderStatusText');
+const menuItemsDiv = document.getElementById('menuItems');
+const selectedItemsList = document.getElementById('selectedItems');
+const payWebappBtn = document.getElementById('payWebapp');
+const payCashierBtn = document.getElementById('payCashier');
 
 // Global variable to store selected order items
 let selectedOrderItems = [];
 
-// Render menu items based on the selected category
+// Initialize customer session by checking for stored table number
+function initCustomerSession() {
+  const tableNum = localStorage.getItem('tableNumber');
+  if (tableNum) {
+    customerLoginDiv.classList.add('hidden');
+    orderingInterfaceDiv.classList.remove('hidden');
+    tableNumberSpan.textContent = tableNum;
+  } else {
+    customerLoginDiv.classList.remove('hidden');
+    orderingInterfaceDiv.classList.add('hidden');
+  }
+}
+
+initCustomerSession();
+
+// Handle temporary login for customer by table number
+if (tableLoginForm) {
+  tableLoginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const tableNum = tableInput.value.trim();
+    if (tableNum !== "") {
+      localStorage.setItem('tableNumber', tableNum);
+      tableNumberSpan.textContent = tableNum;
+      customerLoginDiv.classList.add('hidden');
+      orderingInterfaceDiv.classList.remove('hidden');
+    }
+  });
+}
+
+// Render menu items based on selected category
 function renderMenuItems(category) {
-  const menuItemsDiv = document.getElementById('menuItems');
   menuItemsDiv.innerHTML = '';
-  
   const items = menuData[category];
   if (!items || items.length === 0) {
     menuItemsDiv.innerHTML = '<p>No items available in this category.</p>';
@@ -62,6 +92,8 @@ function renderMenuItems(category) {
       if (item) {
         selectedOrderItems.push(item);
         updateSelectedItems();
+        // Simulate order status update upon first order item addition
+        orderStatusText.textContent = "Order Received";
       }
     });
   });
@@ -69,12 +101,10 @@ function renderMenuItems(category) {
 
 // Update the order summary display
 function updateSelectedItems() {
-  const selectedItemsList = document.getElementById('selectedItems');
   selectedItemsList.innerHTML = '';
   selectedOrderItems.forEach((item, index) => {
     const li = document.createElement('li');
     li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
-    // Remove button for each selected item
     const removeBtn = document.createElement('button');
     removeBtn.textContent = 'Remove';
     removeBtn.style.marginLeft = '10px';
@@ -87,7 +117,7 @@ function updateSelectedItems() {
   });
 }
 
-// Event listener for category navigation clicks
+// Category navigation handling
 document.querySelectorAll('.menu-nav ul li').forEach((navItem) => {
   navItem.addEventListener('click', function() {
     document.querySelectorAll('.menu-nav ul li').forEach(item => item.classList.remove('active'));
@@ -97,28 +127,30 @@ document.querySelectorAll('.menu-nav ul li').forEach((navItem) => {
   });
 });
 
-// Load default category ("Main Course") on page load
+// Load default category on page load
 renderMenuItems('Main Course');
 
-// Handle order submission (simulate sending order data)
-document.getElementById('submitOrder').addEventListener('click', () => {
+// Payment options: simulate payment processing and clear session
+payWebappBtn.addEventListener('click', () => {
+  processPayment("Webapp");
+});
+
+payCashierBtn.addEventListener('click', () => {
+  processPayment("Cashier");
+});
+
+function processPayment(method) {
   if (selectedOrderItems.length === 0) {
-    alert('Please add at least one dish to your order.');
+    alert('No order to process.');
     return;
   }
-  
-  const orderData = {
-    table: tableNumber,
-    items: selectedOrderItems,
-    status: 'Waiting',
-    timestamp: new Date().toISOString()
-  };
-  
-  // Simulate order submission (e.g., via a backend API call)
-  console.log('Order submitted:', orderData);
-  alert('Order submitted successfully!');
-  
-  // Clear the current order
+  alert(`Payment processed via ${method}. Thank you!`);
+  // Reset order and update order status
   selectedOrderItems = [];
   updateSelectedItems();
-});
+  orderStatusText.textContent = "Order Completed";
+  // Clear temporary customer session (table login)
+  localStorage.removeItem('tableNumber');
+  // Reload page to reset customer ordering interface
+  location.reload();
+}

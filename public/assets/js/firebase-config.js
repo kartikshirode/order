@@ -2,7 +2,6 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
-// Your Firebase configuration (replace with your own credentials)
 const firebaseConfig = {
   apiKey: "AIzaSyABLn3WyfzVuwpxVUZTY34Klb10HdpXCJ8",
   authDomain: "order-5e7d1.firebaseapp.com",
@@ -13,7 +12,6 @@ const firebaseConfig = {
   measurementId: "G-ZB2FK2TM8M"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const storage = getStorage(app);

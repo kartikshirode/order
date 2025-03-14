@@ -7,15 +7,55 @@
   <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
-  <h1>Kitchen Dashboard</h1>
-  <div id="ordersContainer">
-    <!-- Orders will be dynamically loaded here -->
-    <p>(Order management functionality to be integrated.)</p>
-  </div>
-  <button id="logoutBtn">Logout</button>
+  <header>
+    <div class="container">
+      <h1>Kitchen Dashboard</h1>
+    </div>
+  </header>
 
-  <!-- Import Authentication and dashboard functionality -->
+  <main>
+    <div class="dashboard-container">
+      <table class="orders-table">
+        <thead>
+          <tr>
+            <th>Table</th>
+            <th>Order Items</th>
+            <th>Status</th>
+            <th>Update</th>
+          </tr>
+        </thead>
+        <tbody id="kitchenOrders">
+          <!-- Example static order row. In a real app, load orders dynamically from Firebase. -->
+          <tr>
+            <td>5</td>
+            <td>Grilled Chicken, Coke</td>
+            <td>
+              <select class="status-dropdown">
+                <option value="Order Received" selected>Order Received</option>
+                <option value="Prepering">Prepering</option>
+                <option value="Cooked">Cooked</option>
+                <option value="Served">Served</option>
+              </select>
+            </td>
+            <td><button class="updateStatus">Update</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button id="logoutBtn">Logout</button>
+  </main>
+
   <script type="module" src="../assets/js/auth.js"></script>
-  <!-- Optionally, add dashboard-specific JS if needed -->
+  <script>
+    // Kitchen dashboard script (simulate updating order status)
+    document.querySelectorAll('.updateStatus').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const row = btn.closest('tr');
+        const newStatus = row.querySelector('.status-dropdown').value;
+        alert(`Order status updated to "${newStatus}"`);
+        // In a real app, update the order status in Firebase here.
+      });
+    });
+  </script>
 </body>
 </html>

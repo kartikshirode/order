@@ -1,7 +1,7 @@
 {
   "name": "order",
   "version": "1.0.0",
-  "description": "Restaurant ordering system using Vercel for hosting and Firebase for Storage and Authentication",
+  "description": "Restaurant ordering system using Vercel for hosting and Firebase for Storage & Authentication",
   "scripts": {
     "dev": "vercel dev",
     "deploy": "vercel --prod"

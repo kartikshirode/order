@@ -1,4 +1,4 @@
-/* Reset and base styles */
+/* Reset and Base Styles */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -13,9 +13,9 @@ body {
   min-height: 100vh;
 }
 
-/* Header styling */
+/* Header */
 header {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   padding: 20px 0;
   text-align: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -23,7 +23,6 @@ header {
 
 header h1 {
   font-size: 2.5rem;
-  margin-bottom: 5px;
   color: #d35400;
 }
 
@@ -36,6 +35,49 @@ header p {
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+/* Login Section (for customer table number entry) */
+.login-section {
+  max-width: 400px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.login-section h2 {
+  margin-bottom: 15px;
+  color: #d35400;
+}
+
+.login-section input {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.login-section button {
+  background: #d35400;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-section button:hover {
+  background: #e67e22;
+}
+
+/* Hide elements when needed */
+.hidden {
+  display: none;
 }
 
 /* Navigation Bar */
@@ -65,23 +107,16 @@ header p {
   color: #fff;
 }
 
-/* Main ordering container */
-main {
-  padding: 40px 20px;
-  display: flex;
-  justify-content: center;
-}
-
+/* Ordering Container */
 .order-container {
   background: #fff;
   padding: 30px;
   border-radius: 10px;
-  width: 100%;
+  margin: 20px auto;
   max-width: 800px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* Table Info */
 .table-info {
   text-align: center;
   margin-bottom: 20px;
@@ -148,62 +183,64 @@ main {
   margin-bottom: 8px;
 }
 
-/* Submit Button */
-#submitOrder {
-  background: #d35400;
-  color: #fff;
-  border: none;
-  padding: 12px 20px;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s;
-  width: 100%;
-}
-
-#submitOrder:hover {
-  background: #e67e22;
-}
-
-/* Footer styling */
-footer {
+/* Payment Section */
+.payment-section {
   text-align: center;
-  padding: 15px 0;
-  background: rgba(255, 255, 255, 0.85);
-  font-size: 0.9rem;
-}
-
-/* Admin Menu Management Styles */
-.menu-management-container {
-  background: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  max-width: 500px;
   margin: 20px auto;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.menu-management-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
+.payment-section h2 {
+  margin-bottom: 15px;
   color: #d35400;
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
+.payment-section button {
+  background: #d35400;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
   border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.payment-section button:hover {
+  background: #e67e22;
+}
+
+/* Dashboard Container for Kitchen/Cashier */
+.dashboard-container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.orders-table th,
+.orders-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.orders-table th {
+  background: #f6d365;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px 0;
+  background: rgba(255,255,255,0.9);
+  font-size: 0.9rem;
+  margin-top: 20px;
 }

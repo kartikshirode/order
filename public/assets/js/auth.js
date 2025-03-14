@@ -1,7 +1,6 @@
 import { auth } from "./firebase-config.js";
 import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 
-// Handle login on the login page
 if (document.getElementById('loginForm')) {
   document.getElementById('loginForm').addEventListener('submit', (e) => {
     e.preventDefault();
@@ -11,7 +10,6 @@ if (document.getElementById('loginForm')) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const userEmail = userCredential.user.email;
-        // Simple redirect based on email substring (customize as needed)
         if (userEmail.includes("kitchen")) {
           window.location.href = 'dashboard/kitchen.html';
         } else if (userEmail.includes("cashier")) {
@@ -27,7 +25,6 @@ if (document.getElementById('loginForm')) {
   });
 }
 
-// Protect dashboard and admin pages: redirect to login if not authenticated
 onAuthStateChanged(auth, (user) => {
   const path = window.location.pathname;
   if ((path.includes('dashboard') || path.includes('admin')) && !user) {
@@ -35,7 +32,6 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-// Logout functionality (for dashboard pages)
 if (document.getElementById('logoutBtn')) {
   document.getElementById('logoutBtn').addEventListener('click', () => {
     signOut(auth)
