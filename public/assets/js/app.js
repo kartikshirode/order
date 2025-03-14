@@ -1,8 +1,8 @@
 // Simulated menu data for demonstration purposes
 const menuData = {
   "Main Course": [
-    { id: "1", name: "Grilled Chicken", description: "Juicy grilled chicken", price: 12.99 },
-    { id: "2", name: "Beef Steak", description: "Tender steak cooked to perfection", price: 19.99 }
+    { id: "1", name: "Aloo Mutter", description: "Juicy Aloo Mutter", price: 2.99 },
+    { id: "2", name: "Butter Paner Masala", description: "Paner to Perfection", price: 19.99 }
   ],
   "Drinks": [
     { id: "3", name: "Coke", description: "Refreshing cola", price: 2.99 },
