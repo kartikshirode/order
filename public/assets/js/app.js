@@ -23,6 +23,7 @@ const tableLoginForm = document.getElementById('tableLoginForm');
 const tableInput = document.getElementById('tableInput');
 const tableNumberDisplay = document.getElementById('tableNumberDisplay'); // in header
 const tableNumberSpan = document.getElementById('tableNumber'); // in order container
+const orderStatusText = document.getElementById('orderStatusText');
 const menuItemsDiv = document.getElementById('menuItems');
 const selectedItemsList = document.getElementById('selectedItems');
 const confirmOrderBtn = document.getElementById('confirmOrder');
@@ -63,7 +64,7 @@ if (tableLoginForm) {
   });
 }
 
-// Render menu items for the given category
+// Render menu items for a given category
 function renderMenuItems(category) {
   menuItemsDiv.innerHTML = '';
   const items = menuData[category];
@@ -84,7 +85,7 @@ function renderMenuItems(category) {
     menuItemsDiv.appendChild(dishCard);
   });
   
-  // Attach event listeners for each "Add to Order" button
+  // Attach event listeners for "Add to Order" buttons
   document.querySelectorAll('.menu-item button').forEach((btn) => {
     btn.addEventListener('click', function() {
       const itemId = this.getAttribute('data-id');
@@ -137,10 +138,10 @@ if (confirmOrderBtn) {
       alert("No items in your order to confirm.");
       return;
     }
-    // In a real app, you would send the order details to your backend/Firebase here.
+    // Simulate order confirmation – in a real app, update your backend/Firebase
     alert("Your order has been confirmed and sent to the kitchen and cashier.");
-    // Optionally, you might disable further modifications after confirmation.
-    // For simulation, you could clear the cart or update order status.
+    // Update the order status panel (this could later be updated by kitchen)
+    orderStatusText.textContent = "Order Received";
   });
 }
 
@@ -157,7 +158,7 @@ function processPayment(method) {
   // Clear the order and update UI
   selectedOrderItems = [];
   updateSelectedItems();
-  // Clear the temporary session so that the table is free for new orders
+  // Clear temporary session so that the table is free for new orders
   localStorage.removeItem('tableNumber');
   // Reload the page to reset the interface
   location.reload();

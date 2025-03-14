@@ -24,7 +24,7 @@
     </form>
   </div>
 
-  <!-- Ordering Interface (hidden until table number is provided) -->
+  <!-- Ordering Interface (hidden until a table number is provided) -->
   <div id="orderingInterface" class="hidden">
     <header>
       <div class="container">
@@ -33,8 +33,13 @@
       </div>
     </header>
 
+    <!-- Order Status Panel -->
+    <div id="orderStatusPanel" class="order-status-panel">
+      <p>Order Status: <span id="orderStatusText">Pending</span></p>
+    </div>
+
     <div class="order-interface">
-      <!-- Display table number -->
+      <!-- Display Table Number -->
       <p>Table: <span id="tableNumberDisplay"></span></p>
 
       <!-- Menu Category Navigation -->
@@ -52,7 +57,7 @@
           <div class="table-info">
             <p>Table: <span id="tableNumber"></span></p>
           </div>
-          <!-- Menu Items -->
+          <!-- Menu Items will load here -->
           <div id="menuItems" class="menu-items"></div>
           <!-- Order Summary -->
           <div class="order-summary">
@@ -80,7 +85,7 @@
     <p>&copy; 2025 Your Restaurant. All Rights Reserved.</p>
   </footer>
 
-  <!-- Load our ordering logic -->
+  <!-- Load ordering logic -->
   <script type="module" src="assets/js/app.js"></script>
 </body>
 </html>
