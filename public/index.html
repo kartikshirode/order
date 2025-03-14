@@ -7,6 +7,14 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
+  <!-- Staff Navigation Bar -->
+  <nav class="staff-nav">
+    <ul>
+      <li><a href="login.html?role=kitchen">Kitchen Login</a></li>
+      <li><a href="login.html?role=cashier">Cashier Login</a></li>
+    </ul>
+  </nav>
+
   <!-- Table Number Entry Section -->
   <div id="customerLogin" class="login-section">
     <h2>Enter Your Table Number</h2>
@@ -16,7 +24,7 @@
     </form>
   </div>
 
-  <!-- Ordering Interface (hidden by default) -->
+  <!-- Ordering Interface (hidden until table number is provided) -->
   <div id="orderingInterface" class="hidden">
     <header>
       <div class="container">
@@ -24,10 +32,12 @@
         <p>Delicious food at your table</p>
       </div>
     </header>
+
     <div class="order-interface">
-      <!-- Display table number in header -->
+      <!-- Display table number -->
       <p>Table: <span id="tableNumberDisplay"></span></p>
-      <!-- Navigation Bar for Menu Categories -->
+
+      <!-- Menu Category Navigation -->
       <nav class="menu-nav">
         <ul>
           <li data-category="Main Course" class="active">Main Course</li>
@@ -36,12 +46,13 @@
           <li data-category="Rice">Rice</li>
         </ul>
       </nav>
+
       <main>
         <div class="order-container">
           <div class="table-info">
             <p>Table: <span id="tableNumber"></span></p>
           </div>
-          <!-- Menu items will load here -->
+          <!-- Menu Items -->
           <div id="menuItems" class="menu-items"></div>
           <!-- Order Summary -->
           <div class="order-summary">
@@ -50,6 +61,12 @@
           </div>
         </div>
       </main>
+
+      <!-- Confirm Order Button -->
+      <div class="confirm-order-section">
+        <button id="confirmOrder">Confirm Order</button>
+      </div>
+
       <!-- Payment Section -->
       <div class="payment-section">
         <h2>Payment Options</h2>
@@ -63,7 +80,7 @@
     <p>&copy; 2025 Your Restaurant. All Rights Reserved.</p>
   </footer>
 
-  <!-- Load our ordering logic (which also handles the temporary login) -->
+  <!-- Load our ordering logic -->
   <script type="module" src="assets/js/app.js"></script>
 </body>
 </html>

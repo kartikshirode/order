@@ -1,7 +1,4 @@
-// Import Firebase config if needed (for future Storage/Authentication usage)
-// import { getAuth } from "./firebase-config.js";
-
-// Simulated menu data (in a real app, fetch from a backend or Firebase)
+// Simulated menu data for demonstration purposes
 const menuData = {
   "Main Course": [
     { id: "1", name: "Grilled Chicken", description: "Juicy grilled chicken", price: 12.99 },
@@ -28,24 +25,23 @@ const tableNumberDisplay = document.getElementById('tableNumberDisplay'); // in 
 const tableNumberSpan = document.getElementById('tableNumber'); // in order container
 const menuItemsDiv = document.getElementById('menuItems');
 const selectedItemsList = document.getElementById('selectedItems');
+const confirmOrderBtn = document.getElementById('confirmOrder');
 const payWebappBtn = document.getElementById('payWebapp');
 const payCashierBtn = document.getElementById('payCashier');
 
 let selectedOrderItems = [];
 
-// Initialize customer session
+// Initialize customer session – check if table number exists
 function initCustomerSession() {
   const tableNum = localStorage.getItem('tableNumber');
   if (tableNum) {
-    // Hide login, show ordering interface
     customerLoginDiv.classList.add('hidden');
     orderingInterfaceDiv.classList.remove('hidden');
     tableNumberDisplay.textContent = tableNum;
     tableNumberSpan.textContent = tableNum;
-    // Optionally, load default category menu items
+    // Load default category
     renderMenuItems('Main Course');
   } else {
-    // Show login, hide ordering interface
     customerLoginDiv.classList.remove('hidden');
     orderingInterfaceDiv.classList.add('hidden');
   }
@@ -60,7 +56,7 @@ if (tableLoginForm) {
     const tableNum = tableInput.value.trim();
     if (tableNum !== "") {
       localStorage.setItem('tableNumber', tableNum);
-      initCustomerSession(); // reinitialize to show ordering interface
+      initCustomerSession();
     } else {
       alert("Please enter a valid table number.");
     }
@@ -119,7 +115,7 @@ function updateSelectedItems() {
   });
 }
 
-// Handle category navigation
+// Handle category navigation clicks
 document.querySelectorAll('.menu-nav ul li').forEach((navItem) => {
   navItem.addEventListener('click', function() {
     document.querySelectorAll('.menu-nav ul li').forEach(item => item.classList.remove('active'));
@@ -129,9 +125,23 @@ document.querySelectorAll('.menu-nav ul li').forEach((navItem) => {
   });
 });
 
-// Load default category on page load if ordering interface is visible
+// Load default category if ordering interface is visible
 if (!orderingInterfaceDiv.classList.contains('hidden')) {
   renderMenuItems('Main Course');
+}
+
+// Handle "Confirm Order" button click
+if (confirmOrderBtn) {
+  confirmOrderBtn.addEventListener('click', () => {
+    if (selectedOrderItems.length === 0) {
+      alert("No items in your order to confirm.");
+      return;
+    }
+    // In a real app, you would send the order details to your backend/Firebase here.
+    alert("Your order has been confirmed and sent to the kitchen and cashier.");
+    // Optionally, you might disable further modifications after confirmation.
+    // For simulation, you could clear the cart or update order status.
+  });
 }
 
 // Payment options: simulate payment processing and clear session
@@ -147,9 +157,7 @@ function processPayment(method) {
   // Clear the order and update UI
   selectedOrderItems = [];
   updateSelectedItems();
-  // Optionally update order status or perform other actions here
-
-  // Clear temporary session so the table is ready for new orders
+  // Clear the temporary session so that the table is free for new orders
   localStorage.removeItem('tableNumber');
   // Reload the page to reset the interface
   location.reload();
